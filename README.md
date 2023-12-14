@@ -34,7 +34,7 @@ cd <project_root_dir>
 docker compose -f docker-compose.yml create --build
 
 docker compose -f docker-compose.yml create
-docker compose -f docker-compose.yml run mkdocs-builder
+docker compose -f docker-compose.yml run --rm mkdocs-builder
 ```
 
 If  you want to build again

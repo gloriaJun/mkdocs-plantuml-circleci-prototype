@@ -6,9 +6,9 @@ tags:
     - tag2
 ---
 
-## Image
+## Diagram
 
-  <img src="/assets/images/avatar.jpeg" alt="ic_card_auth" width="800px">
+<img src="../assets/images/diagrams/sample-01.png" alt="ic_card_auth" width="200px">
 
 
 ## Mermaid

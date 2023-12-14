@@ -6,35 +6,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-#      target: installe
       args:
         progress: plain
     stdin_open: true
     tty: true
     volumes:
       - ${PWD}:/app
-#    working_dir: /app
-#    entrypoint:
-#      - "ls -al"
-
-#services:
-#  plantuml:
-#    container_name: plantuml
-#    image: plantuml/plantuml-server:jetty
-#    ports:
-#      - "9080:8080"
-#  mkdocs-builder:
-#    container_name: mkdocs-builder
-#    image: python:3.12.0-alpine
-#    stdin_open: true
-#    tty: true
-#    volumes:
-#      - ${PWD}:/app
-#    entrypoint: ["sh", "-c"]
-#    working_dir: /app
-#    command:
-#      - |
-#        ls -al
-#        pip install --no-cache-dir -r requirements.txt
-#    entrypoint:
-#      - "ls -al"
+    working_dir: /app
+    entrypoint: ["python", "-m", "mkdocs", "build"]
