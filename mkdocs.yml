@@ -1,0 +1,87 @@
+site_name: MkDocs Sample Document
+site_description: sample document
+site_author: gloriaJun
+
+# Configuration
+#  https://squidfunk.github.io/mkdocs-material/reference/
+theme:
+  name: material
+  features:
+    #    - content.action.edit
+    #    - content.action.view
+    #    - content.code.annotate
+    - content.tabs.link
+    - content.code.copy
+    - content.tooltips
+    - navigation.tabs
+    - navigation.expand
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+# Plugins
+plugins:
+  - search
+  - include_dir_to_nav
+  - tags:
+      tags_file: tags.md
+  - git-revision-date-localized:
+      type: datetime
+#  - plantuml-colocator
+  - build_plantuml:
+        render: 'server' # or "local" for local rendering
+  #        server: 'http://www.plantuml.com/plantuml' # official plantuml server
+        server: 'http://localhost:9080'
+        disable_ssl_certificate_validation: true # for self-signed and invalid certs
+        output_format: 'png' # "svg" or "png"
+        allow_multiple_roots: false # in case your codebase contains more locations for diagrams (all ending in diagram_root)
+        diagram_root: '' # should reside under docs_dir
+        output_folder: './docs/assets/images/diagrams'
+        input_folder: './docs/uml'
+        input_extensions: '' # comma separated list of extensions to parse, by default every file is parsed
+  - offline:
+      enabled: !ENV [OFFLINE, true]
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - def_list
+  - attr_list
+  - footnotes
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true

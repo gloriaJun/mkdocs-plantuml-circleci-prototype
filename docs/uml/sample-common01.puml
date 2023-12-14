@@ -1,0 +1,10 @@
+@startuml sample-common-01
+title sample-common-01
+
+participant "USER"
+participant "SERVER"
+
+USER -> SERVER: request
+SERVER->USER: answer
+
+@enduml
