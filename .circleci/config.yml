@@ -13,21 +13,36 @@ jobs:
   build-deploy:
     docker:
       - image: cimg/python:3.12.0
+      - image: plantuml/plantuml-server:jetty
     environment:
       OFFLINE: false
+      PLANT_UML_SERVER: "http://localhost:8080"
     steps:
       - checkout
-      - run: python --version
-      - run: pip --version
+      - run:
+          name: Waiting for Plantuml Server to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 8080 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Plantuml Server && exit 1
+      - run:
+          name: version check
+          command: |
+            python --version 
+            pip --version
       - run:
           name: install
           command: |
             pip install -r requirements.txt
-      - run:
-          name: build
-          command: |
-            mkdocs build
-            ls -al site
+#      - run:
+#          name: build
+#          command: |
+#            mkdocs build
+#            ls -al site
 #      - add_ssh_keys:
 #          fingerprints:
 #            - <token_info>
@@ -41,7 +56,7 @@ jobs:
 #            git config user.email "gloriaJun@gmail.com"
 #            git config user.name "CircleCI Job"
 #            git commit --allow-empty -am "Automatic commit from CircleCI [`date +'%Y-%m-%d %H:%M:%S'`]"
-#            git push -f "git@github.com:gloriaJun/mkdocs-plantuml-prototype.git" HEAD:gh-pages
+#            git push -f "git@github.com:gloriaJun/mkdocs-plantuml-circleci-prototype.git" HEAD:gh-pages
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
