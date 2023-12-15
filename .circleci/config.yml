@@ -45,7 +45,7 @@ jobs:
       - run:
           name: build
           command: |
-            sh ./start.sh build
+            bash ./start.sh build
             ls -al site
       - add_ssh_keys:
           fingerprints:

@@ -44,22 +44,22 @@ theme:
 # Plugins
 plugins:
   - search
+  - macros
   - include_dir_to_nav
   - tags:
       tags_file: tags.md
   - git-revision-date-localized:
       type: datetime
-#  - plantuml-colocator
   - build_plantuml:
-        render: 'server' # or "local" for local rendering
-        server: !ENV [PLANT_UML_SERVER, 'http://localhost:8090']
-        disable_ssl_certificate_validation: true # for self-signed and invalid certs
-        output_format: 'png' # "svg" or "png"
-        allow_multiple_roots: false # in case your codebase contains more locations for diagrams (all ending in diagram_root)
-        diagram_root: '' # should reside under docs_dir
-        output_folder: './docs/assets/images/diagrams'
-        input_folder: './docs/uml'
-        input_extensions: '' # comma separated list of extensions to parse, by default every file is parsed
+      render: 'server' # or "local" for local rendering
+      server: !ENV [PLANT_UML_SERVER, 'http://localhost:8090']
+      disable_ssl_certificate_validation: true # for self-signed and invalid certs
+      output_format: 'png' # "svg" or "png"
+      allow_multiple_roots: false # in case your codebase contains more locations for diagrams (all ending in diagram_root)
+      diagram_root: '' # should reside under docs_dir
+      output_folder: './docs/assets/images/diagrams'
+      input_folder: './docs/uml'
+      input_extensions: '' # comma separated list of extensions to parse, by default every file is parsed
   - offline:
       enabled: !ENV [OFFLINE, true]
 
