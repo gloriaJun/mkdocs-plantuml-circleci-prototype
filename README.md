@@ -8,41 +8,24 @@
 - Python v3.10 
 - pip 23.3.1
 
-## Install
+## Run or Build
 
 ```bash
-pip install -r requirements.txt
+sh ./start.sh <serve | build>
 ```
 
-## run
+## Docker Tips
 
-```bash
-mkdocks server
-```
+- build and run
 
-## build
-
-```bash
-mkdocs build
-```
-
-## Run with docker-compose
 ```bash
 cd <project_root_dir>
 
 # to rebuild
-docker compose -f docker-compose.yml create --build
 
 docker compose -f docker-compose.yml create
 docker compose -f docker-compose.yml run --rm mkdocs-builder
 ```
-
-If  you want to build again
-```bash
-docker compose -f docker-compose.yml create --build
-```
-
-## Tips
 
 - remove all images, container, volumes
 
