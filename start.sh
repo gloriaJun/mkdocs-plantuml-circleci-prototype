@@ -12,14 +12,26 @@ function _exec() {
   eval ${command}
 }
 
-## run plantuml server
-_exec "docker compose -f docker-compose.yml up -d plantuml-server" "Run plantuml Server on Docker Container"
-
-if [ "${build_option}" == "build" ]; then
-  echo "hi"
+if [ "${CI}" != true ]; then
+  ## run plantuml server
+  _exec "docker compose -f docker-compose.yml up -d plantuml-server" "Run plantuml Server on Docker Container"
+  nc -z localhost 8090
+  if [ $? != 0 ]; then
+    echo ""
+    echo "[Error] Plantuml Server is not running..."
+    exit 1
+  fi
 fi
 
 _exec "mkdocs ${build_option}" "Run mkdocs"
+
+if [ "${build_option}" == "build" ]; then
+  # remove exclude dir
+  _exec "rm -rf site/uml" "Remove exclude directory for deploying"
+
+  # find the imported uml image files
+  find site -type f -name '*.html' -print | xargs awk '/\/diagrams\//'
+fi
 
 # run
 #COMMAND=${command} docker compose -f docker-compose.yml run --rm=true mkdocs-builder

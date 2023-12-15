@@ -17,6 +17,7 @@ jobs:
     environment:
       OFFLINE: false
       PLANT_UML_SERVER: "http://localhost:8080"
+      SITE_URL: "https://gloriajun.github.io/mkdocs-plantuml-circleci-prototype/"
     steps:
       - checkout
       - run:
@@ -41,25 +42,25 @@ jobs:
           name: Install Packages
           command: |
             pip install -r requirements.txt
-#      - run:
-#          name: build
-#          command: |
-#            mkdocs build
-#            ls -al site
-#      - add_ssh_keys:
-#          fingerprints:
-#            - <token_info>
-#      - run:
-#          name: deploy
-#          command: |
-#            cd site
-#            ls -al
-#            git init .
-#            git add .
-#            git config user.email "gloriaJun@gmail.com"
-#            git config user.name "CircleCI Job"
-#            git commit --allow-empty -am "Automatic commit from CircleCI [`date +'%Y-%m-%d %H:%M:%S'`]"
-#            git push -f "git@github.com:gloriaJun/mkdocs-plantuml-circleci-prototype.git" HEAD:gh-pages
+      - run:
+          name: build
+          command: |
+            sh ./start.sh build
+            ls -al site
+      - add_ssh_keys:
+          fingerprints:
+            - fb:b0:db:92:c3:1d:f8:8f:69:87:c8:93:b1:eb:05:3c
+      - run:
+          name: deploy
+          command: |
+            cd site
+            ls -al
+            git init .
+            git add .
+            git config user.email "gloriaJun@gmail.com"
+            git config user.name "CircleCI Job"
+            git commit --allow-empty -am "Automatic commit from CircleCI [`date +'%Y-%m-%d %H:%M:%S'`]"
+            git push -f "git@github.com:gloriaJun/mkdocs-plantuml-circleci-prototype.git" HEAD:gh-pages
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

@@ -8,7 +8,7 @@ tags:
 
 ## Diagram
 
-<img src="../assets/images/diagrams/sample-01.png" alt="ic_card_auth" width="200px">
+<img src="/assets/images/diagrams/sample-01.png" alt="ic_card_auth" width="200px">
 
 
 ## Mermaid

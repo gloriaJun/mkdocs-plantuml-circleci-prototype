@@ -1,6 +1,9 @@
 site_name: MkDocs Sample Document
 site_description: sample document
 site_author: gloriaJun
+site_url: !ENV [SITE_URL, '']
+
+repo_url: https://github.com/gloriaJun/mkdocs-plantuml-circleci-prototype
 
 # Configuration
 #  https://squidfunk.github.io/mkdocs-material/reference/
