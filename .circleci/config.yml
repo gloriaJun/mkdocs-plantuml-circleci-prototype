@@ -67,7 +67,7 @@ jobs:
 workflows:
   deploy:
     when:
-      condition:
-      equal: [ main ]
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
     jobs:
       - build-deploy
