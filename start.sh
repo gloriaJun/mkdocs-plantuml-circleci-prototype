@@ -1,6 +1,8 @@
 #!/bin/bash
 
-build_option=$1
+build_command=$1
+shift
+build_options=$@
 
 function _exec() {
   command=$1
@@ -24,7 +26,7 @@ function _run_docker() {
 }
 
 function _run_mkdocs() {
-   _exec "mkdocs ${build_option}" "Run mkdocs"
+   _exec "mkdocs ${build_command} ${build_options}" "Run mkdocs"
 
    if [ "${build_option}" == "build" ]; then
      # remove exclude dir
