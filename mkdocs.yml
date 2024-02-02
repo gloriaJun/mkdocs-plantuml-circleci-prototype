@@ -46,6 +46,7 @@ plugins:
   - search
   - macros
   - include_dir_to_nav
+  - site-urls
   - tags:
       tags_file: tags.md
   - git-revision-date-localized:

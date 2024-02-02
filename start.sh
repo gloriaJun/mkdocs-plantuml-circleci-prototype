@@ -14,7 +14,7 @@ function _exec() {
 
 function _run_docker() {
    ## run plantuml server
-   _exec "docker compose -f docker-compose.yml up -d plantuml-server" "Run plantuml Server on Docker Container"
+   _exec "docker compose -f docker-compose.yml up -d --build plantuml-server" "Run plantuml Server on Docker Container"
    nc -z localhost 8090
    if [ $? != 0 ]; then
      echo ""
