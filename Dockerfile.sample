@@ -1,0 +1,17 @@
+FROM plantuml/plantuml-server:jetty
+
+USER root
+
+RUN apt-get update \
+  && apt-get install --no-install-recommends -y \
+    python3 \
+    python3-pip \
+    git \
+  && apt-get -y clean \
+  && rm -rf /var/lib/apt/lists/*
+
+USER jetty
+
+ENV PATH=/var/lib/jetty/.local/bin:$PATH
+
+WORKDIR /app

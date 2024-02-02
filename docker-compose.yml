@@ -1,8 +1,27 @@
 version: "3.8"
 
 services:
+  #  mkdocs-base:
+  #    container_name: mkdocs-base
+  #    build:
+  #      context: .
+  #      dockerfile: Dockerfile
+  #    stdin_open: true
+  #    tty: true
+  #    volumes:
+  #      - ../.git:/app/.git
+  #      - ../document:/app/document
+  #      - .:/app/iframe-kwv
+  #    expose:
+  #      - "8000"
+  #    ports:
+  #      - "8000:8000"
+  #      - "8090:8080"
+
   plantuml-server:
     container_name: plantuml-server
     image: plantuml/plantuml-server:jetty
     stdin_open: true
     tty: true
+    ports:
+      - "8090:8080"

@@ -1,0 +1,43 @@
+variables:
+  PLANT_UML_SERVER_NAME: plantuml-server
+
+pages:
+  stage: deploy
+  image: python:3.12.0
+  services:
+    - name: plantuml/plantuml-server:jetty
+      alias: $PLANT_UML_SERVER_NAME
+  rules:
+    - changes:
+        - .gitlab-ci.yml
+  cache:
+    paths:
+      - public
+  artifacts:
+    paths:
+      - public
+  variables:
+    PLANT_UML_SERVER_PORT: "8080"
+    PLANT_UML_SERVER: "http://$PLANT_UML_SERVER_NAME:$PLANT_UML_SERVER_PORT"
+    OFFLINE: "false"
+  before_script:
+    - apt-get update && apt-get install -y git netcat-traditional
+    - git config --global --add safe.directory '*'
+    - echo "Waiting for Plantuml Server to be ready"
+    - |
+      for i in `seq 1 10`;
+      do
+        nc -z $PLANT_UML_SERVER_NAME $PLANT_UML_SERVER_PORT && echo Success && break
+        echo -n .
+        sleep 1
+      done
+      echo Failed waiting for Plantuml Server && exit 1
+    - echo "Plantuml Server is ready"
+    - curl -sSfL "$PLANT_UML_SERVER"
+    - pip install -r requirements.txt
+  script:
+    - mkdocs build
+    - bash ./run.sh build
+    - ls -al site
+    - mv site public
+
