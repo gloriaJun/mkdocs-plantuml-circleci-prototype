@@ -1,0 +1,11 @@
+@startuml sample-01
+title sample-01
+
+participant "USER"
+participant "SERVER"
+
+USER -> SERVER: request
+SERVER->USER: answer
+!include sample-common01.puml
+
+@enduml
